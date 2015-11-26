@@ -65,6 +65,7 @@ class IterState(object):
         self.parent.after(self.iter_time, self.next)
 
     def onMotion(self, event):
+        self.img.blank()
         self.newColor()
         self.reCenter(event.x, event.y)
 
