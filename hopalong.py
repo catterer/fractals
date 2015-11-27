@@ -18,6 +18,7 @@ class IterState(object):
         self.colors = ["red", "orange", "yellow", "green", "blue", "violet"]
         self.parent = pa
         self.width = wi
+        self.colorInc = 0
         self.height = he
         self.a = 0.4
         self.b = 1.0
@@ -54,6 +55,10 @@ class IterState(object):
         self.y = 0.0
 
     def next(self):
+        self.colorInc = self.colorInc+1
+        if self.colorInc == 10:
+            self.colorInc = 0
+            self.newColor()
         x_new = self.y - sign(self.x) * sqrt(abs(self.b * self.x - self.c))
         y_new = self.a - self.x
         x_real = zoom(x_new, self.center_x, self.scale)
@@ -66,7 +71,6 @@ class IterState(object):
 
     def onMotion(self, event):
         self.img.blank()
-        self.newColor()
         self.reCenter(event.x, event.y)
 
     def onClick(self, event):
