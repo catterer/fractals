@@ -15,6 +15,7 @@ def zoom(val, center, scale):
 
 class IterState(object):
     def __init__(self, pa, wi, he):
+        self.colorIdx = 0
         self.colors = ["red", "orange", "yellow", "green", "blue", "violet"]
         self.parent = pa
         self.width = wi
@@ -46,7 +47,8 @@ class IterState(object):
         self.parent.after(self.iter_time, self.next)
 
     def newColor(self):
-        self.color = random.choice(self.colors)
+        self.colorIdx = (self.colorIdx + 1) % len(self.colors)
+        self.color = self.colors[self.colorIdx]
 
     def reCenter(self, x, y):
         self.center_x = x
